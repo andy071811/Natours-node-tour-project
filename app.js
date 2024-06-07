@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController')
@@ -73,11 +74,14 @@ app.use(hpp({
     whitelist: ['duration', 'ratingsQuantity', 'ratingsAverage', 'maxGroupSize', 'difficulty', 'price']
 }));
 
+// this will compress all the text that gets sent to the clients
+app.use(compression());
+
 // test middleware
-app.use((req, res, next) => {
-    req.requestTime = new Date().toISOString();
-    next();
-});
+// app.use((req, res, next) => {
+//     req.requestTime = new Date().toISOString();
+//     next();
+// });
 
 // THE ROUTES
 

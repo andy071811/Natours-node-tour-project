@@ -69,8 +69,8 @@ exports.getMe = (req, res, next) => {
 };
 
 exports.updateMe = catchAsync(async (req, res, next) => {
-    console.log(req.file);
-    console.log(req.body);
+    //console.log(req.file);
+    //console.log(req.body);
     // function handling the user changing data about itself
 
     // 1 - create an error if the user tries to update the password (posts password data):
