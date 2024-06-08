@@ -46,3 +46,11 @@ process.on('unhandledRejection', err => {
     process.exit(1);
   });
 });
+
+// a sigterm causes a program to stop running, something heroku does every 24 hours. We use server.close() to allow all reqs to finish first.
+process.on('SIGTERM', () => {
+  console.log('Sigterm received, shutting down gracefully');
+  server.close(() => {
+    console.log("Process terminated");
+  });
+});
