@@ -9,6 +9,7 @@ const hpp = require('hpp');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController')
@@ -24,6 +25,12 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'))
 
 // GLOBAL MIDDLEWARES (THAT ALL ROUTERS USE):
+
+// IMPLEMENT CORS:
+app.use(cors()); // this adds specific headers and enable CROSS ORIGIN RESOURCE SHARING
+// it sets Access-Control-Allow-Origin to * (everything)
+
+app.options('*', cors());
 
 // serving static files:
 app.use(express.static(path.join(__dirname, 'public')));
@@ -92,7 +99,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter)
 
-// middleware if URL is not found (for all operations) - this is run is the request isn't found in our routers above:
+// middleware if URL is not found (for all operations) - this is run if the request isn't found in our routers above:
 app.all('*', (req, res, next) => {
     // res.status(404).json({
     //     status: 'fail',
