@@ -12,7 +12,7 @@ const router = express.Router();
 
 //usually use app.get(); for rendering pages in the browser
 
-router.get('/', createBookingCheckout, isLoggedIn, getOverview);
+router.get('/', /*createBookingCheckout,*/ isLoggedIn, getOverview);
 router.get('/tour/:slug', isLoggedIn, getTour);
 router.get('/login', isLoggedIn, login);
 router.get('/me', protect, getAccount);

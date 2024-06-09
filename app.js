@@ -57,6 +57,9 @@ const limiter = rateLimit({
 
 app.use('/api', limiter);
 
+// we need to call this route before the body parser otherwise webhookCheckout will not work:
+app.post('/webhook-checkout', express.raw({ type: application/json }), webhookCheckout)
+
 // development logging:
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
