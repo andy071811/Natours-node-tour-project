@@ -3,6 +3,8 @@ import { displayMap } from './mapbox';
 import '@babel/polyfill';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { showAlert } from './alerts';
+
 
 
 // DOM ELEMENTS: 
@@ -72,4 +74,7 @@ if (bookBtn) {
         const { tourId } = e.target.dataset; // getting the tour id from the event click (in tour.pug)
         bookTour(tourId);
     });
-}
+};
+
+const alertMessage = querySelector('body').dataset.alert;
+if (alert) showAlert('success', alertMessage, 20);

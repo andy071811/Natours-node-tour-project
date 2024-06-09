@@ -1,10 +1,12 @@
 const { isLoggedIn, protect } = require('../controllers/authenticationController');
 const { createBookingCheckout } = require('../controllers/bookingController');
-const { getOverview, getTour, login, getAccount, updateUserData, getMyTours } = require('../controllers/viewsController');
+const { getOverview, getTour, login, getAccount, updateUserData, getMyTours, alerts } = require('../controllers/viewsController');
 
 express = require('express');
 
 const router = express.Router();
+
+router.use(alerts)
 
 // routing for the rendered pages: 
 

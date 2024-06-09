@@ -35,7 +35,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     // });
 
     const session = await stripe.checkout.sessions.create({
-        success_url: `${req.protocol}://${req.get('host')}/my-tours`,
+        success_url: `${req.protocol}://${req.get('host')}/my-tours?alert=booking`,
         customer_email: req.user.email, // this will auto populate the customers email in the checkout page
         client_reference_id: req.params.tourId, // this is a custom field
         line_items: [
@@ -94,7 +94,7 @@ exports.webhookCheckout = (req, res, next) => {
 
     };
 
-    if (event.type === 'checkout.session.complete') {
+    if (event.type === 'checkout.session.completed') {
         createBookingCheckout(event.data.session);
 
         res.status(200).json({
